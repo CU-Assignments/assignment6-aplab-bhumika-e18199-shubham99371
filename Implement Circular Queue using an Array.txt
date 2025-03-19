@@ -1,0 +1,55 @@
+class MyCircularQueue {
+private:
+    int *arr;      // Dynamic array
+    int front;     // Points to the front element
+    int rear;      // Points to the last element
+    int size;      // Current number of elements
+    int capacity;  // Maximum size of the queue
+
+public:
+    MyCircularQueue(int k) {
+        capacity = k;
+        arr = new int[capacity];
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    bool enQueue(int value) {
+        if (isFull()) return false; // Queue is full
+        rear = (rear + 1) % capacity;
+        arr[rear] = value;
+        size++;
+        return true;
+    }
+
+    bool deQueue() {
+        if (isEmpty()) return false; // Queue is empty
+        front = (front + 1) % capacity;
+        size--;
+        return true;
+    }
+
+    int Front() {
+        if (isEmpty()) return -1; // Queue is empty
+        return arr[front];
+    }
+
+    int Rear() {
+        if (isEmpty()) return -1; // Queue is empty
+        return arr[rear];
+    }
+
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    bool isFull() {
+        return size == capacity;
+    }
+
+    ~MyCircularQueue() {
+        delete[] arr; // Free allocated memory
+    }
+};
+

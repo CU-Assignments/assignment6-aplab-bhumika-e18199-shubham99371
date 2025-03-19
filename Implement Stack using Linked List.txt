@@ -1,0 +1,48 @@
+class MyStack {
+private:
+    struct Node {
+        int data;
+        Node* next;
+        Node(int x) : data(x), next(nullptr) {} // Constructor
+    };
+    
+    Node* head; // Top of the stack
+
+public:
+    MyStack() {
+        head = nullptr; // Initialize stack as empty
+    }
+
+    void push(int x) {
+        Node* newNode = new Node(x);
+        newNode->next = head;
+        head = newNode;
+    }
+
+    int pop() {
+        if (!head) return -1; // Return -1 if stack is empty
+        int topValue = head->data;
+        Node* temp = head;
+        head = head->next;
+        delete temp; // Free memory
+        return topValue;
+    }
+
+    int top() {
+        if (!head) return -1; // Return -1 if stack is empty
+        return head->data;
+    }
+
+    bool empty() {
+        return head == nullptr;
+    }
+};
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack* obj = new MyStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->top();
+ * bool param_4 = obj->empty();
+ */

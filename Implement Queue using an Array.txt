@@ -1,0 +1,39 @@
+class MyQueue {
+private:
+    int arr[1000]; // Fixed-size array
+    int frontIndex, rearIndex, currentSize;
+
+public:
+    MyQueue() {
+        frontIndex = 0;
+        rearIndex = -1;
+        currentSize = 0;
+    }
+
+    void push(int x) {
+        if (currentSize < 1000) { // Ensure queue is not full
+            rearIndex = (rearIndex + 1) % 1000;
+            arr[rearIndex] = x;
+            currentSize++;
+        }
+    }
+
+    int pop() {
+        if (currentSize == 0) return -1; // Queue is empty
+        int frontValue = arr[frontIndex];
+        frontIndex = (frontIndex + 1) % 1000;
+        currentSize--;
+        return frontValue;
+    }
+
+    int front() {
+        if (currentSize == 0) return -1; // Queue is empty
+        return arr[frontIndex];
+    }
+
+    bool empty() {
+        return currentSize == 0;
+    }
+};
+
+

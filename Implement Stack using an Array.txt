@@ -1,0 +1,36 @@
+class MyStack {
+private:
+    int arr[1000]; // Fixed-size array
+    int topIndex;  // Pointer to the top element
+
+public:
+    MyStack() {
+        topIndex = -1; // Initialize stack as empty
+    }
+
+    void push(int x) {
+        if (topIndex < 999) { // Ensure stack is not full
+            arr[++topIndex] = x;
+        }
+    }
+
+    int pop() {
+        if (topIndex >= 0) {
+            return arr[topIndex--];
+        }
+        return -1; // Return -1 if stack is empty
+    }
+
+    int top() {
+        if (topIndex >= 0) {
+            return arr[topIndex];
+        }
+        return -1; // Return -1 if stack is empty
+    }
+
+    bool empty() {
+        return topIndex == -1;
+    }
+};
+
+

@@ -1,0 +1,66 @@
+class MyDeque {
+private:
+    stack<int> frontStack, backStack;
+
+    void transfer(stack<int>& src, stack<int>& dest) {
+        while (!src.empty()) {
+            dest.push(src.top());
+            src.pop();
+        }
+    }
+
+public:
+    MyDeque() {
+        // Constructor
+    }
+
+    void pushFront(int x) {
+        frontStack.push(x);
+    }
+
+    void pushBack(int x) {
+        backStack.push(x);
+    }
+
+    int popFront() {
+        if (frontStack.empty()) {
+            if (backStack.empty()) return -1;
+            transfer(backStack, frontStack);
+        }
+        int front = frontStack.top();
+        frontStack.pop();
+        return front;
+    }
+
+    int popBack() {
+        if (backStack.empty()) {
+            if (frontStack.empty()) return -1;
+            transfer(frontStack, backStack);
+        }
+        int back = backStack.top();
+        backStack.pop();
+        return back;
+    }
+
+    int peekFront() {
+        if (frontStack.empty()) {
+            if (backStack.empty()) return -1;
+            transfer(backStack, frontStack);
+        }
+        return frontStack.top();
+    }
+
+    int peekBack() {
+        if (backStack.empty()) {
+            if (frontStack.empty()) return -1;
+            transfer(frontStack, backStack);
+        }
+        return backStack.top();
+    }
+
+    bool empty() {
+        return frontStack.empty() && backStack.empty();
+    }
+};
+
+
